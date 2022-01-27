@@ -1,0 +1,35 @@
+{
+  "name": "svelte-adapter-github",
+  "version": "0.0.0",
+  "description": "[Adapter](https://kit.svelte.dev/docs#adapters) for SvelteKit apps that prerenders your site as a collection of static files.",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "type": "module",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malynium/svelte-adapter-github.git"
+  },
+  "keywords": [
+    "svelte",
+    "github",
+    "adapter"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/malynium/svelte-adapter-github/issues"
+  },
+  "homepage": "https://github.com/malynium/svelte-adapter-github#readme",
+  "devDependencies": {
+    "@sveltejs/kit": "next",
+    "svelte": "^3.44.0"
+  },
+  "dependencies": {
+    "tiny-glob": "0.2.9"
+  }
+}
