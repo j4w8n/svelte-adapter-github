@@ -1,6 +1,6 @@
 {
   "name": "svelte-adapter-github",
-  "version": "0.0.0",
+  "version": "0.0.1-next.0",
   "description": "[Adapter](https://kit.svelte.dev/docs#adapters) for SvelteKit apps that prerenders your site as a collection of static files.",
   "main": "index.js",
   "exports": {
