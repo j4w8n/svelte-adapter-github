@@ -1,0 +1,36 @@
+{
+	"name": "@sveltejs/adapter-static",
+	"version": "1.0.0-next.43",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sveltejs/kit",
+		"directory": "packages/adapter-static"
+	},
+	"license": "MIT",
+	"homepage": "https://kit.svelte.dev",
+	"type": "module",
+	"main": "index.js",
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"import": "./index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"types": "index.d.ts",
+	"scripts": {
+		"lint": "prettier --check . --config ../../.prettierrc --ignore-path .gitignore",
+		"check": "tsc",
+		"format": "npm run lint -- --write",
+		"test": "uvu test test.js"
+	},
+	"devDependencies": {
+		"@sveltejs/kit": "workspace:*",
+		"@types/node": "^16.11.36",
+		"sirv": "^2.0.2",
+		"svelte": "^3.48.0",
+		"typescript": "^4.8.2",
+		"uvu": "^0.5.3",
+		"vite": "^3.1.1"
+	}
+}
