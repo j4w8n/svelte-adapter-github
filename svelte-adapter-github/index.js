@@ -1,10 +1,11 @@
 import path from 'path';
+import { writeFileSync } from 'fs';
 import { platforms } from './platforms.js';
 
 /** @type {import('.').default} */
 export default function (options) {
 	return {
-		name: '@sveltejs/adapter-static',
+		name: 'svelte-adapter-github',
 
 		async adapt(builder) {
 			if (!options?.fallback) {
@@ -27,7 +28,7 @@ export default function (options) {
 				if (dynamic_routes.length > 0) {
 					const prefix = path.relative('.', builder.config.kit.files.routes);
 					builder.log.error(
-						`@sveltejs/adapter-static: all routes must be fully prerenderable (unless using the 'fallback' option — see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#spa-mode). Try adding \`export const prerender = true\` to your root layout.js — see https://kit.svelte.dev/docs/page-options#prerender for more details`
+						`svelte-adapter-github: all routes must be fully prerenderable (unless using the 'fallback' option — see https://github.com/malynium/svelte-adapter-github#spa-mode). Try adding \`export const prerender = true\` to your root layout.js — see https://kit.svelte.dev/docs/page-options#prerender for more details`
 					);
 					builder.log.error(
 						dynamic_routes.map((id) => `  - ${path.posix.join(prefix, id)}`).join('\n')
@@ -41,7 +42,7 @@ export default function (options) {
 			if (platform) {
 				if (options) {
 					builder.log.warn(
-						`Detected ${platform.name}. Please remove adapter-static options to enable zero-config mode`
+						`Detected ${platform.name}. Please remove svelte-adapter-github options to enable zero-config mode`
 					);
 				} else {
 					builder.log.info(`Detected ${platform.name}, using zero-config mode`);
@@ -49,10 +50,12 @@ export default function (options) {
 			}
 
 			const {
-				pages = 'build',
+				pages = 'docs',
 				assets = pages,
 				fallback,
-				precompress
+				precompress,
+				domain = '',
+				jekyll = false
 			} = options ??
 			platform?.defaults(builder.config) ??
 			/** @type {import('./index').AdapterOptions} */ ({});
@@ -62,6 +65,9 @@ export default function (options) {
 
 			builder.writeClient(assets);
 			builder.writePrerendered(pages, { fallback });
+
+			if (!jekyll) writeFileSync(`${pages}/.nojekyll`,``);
+      if (domain) writeFileSync(`${pages}/CNAME`,`${domain}`);
 
 			if (precompress) {
 				builder.log.minor('Compressing assets and pages');

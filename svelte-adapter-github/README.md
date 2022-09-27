@@ -1,24 +1,26 @@
-# @sveltejs/adapter-static
+# svelte-adapter-github
 
-[Adapter](https://kit.svelte.dev/docs/adapters) for SvelteKit apps that prerenders your entire site as a collection of static files. If you'd like to prerender only some pages, you will need to use a different adapter together with [the `prerender` option](https://kit.svelte.dev/docs/page-options#prerender).
+[Adapter](https://kit.svelte.dev/docs/adapters) for SvelteKit apps that prerenders your entire site as a collection of static files on GitHub. If you'd like to prerender only some pages, you will need to use a different adapter together with [the `prerender` option](https://kit.svelte.dev/docs/page-options#prerender).
 
 ## Usage
 
-Install with `npm i -D @sveltejs/adapter-static`, then add the adapter to your `svelte.config.js`...
+Install with `npm i -D svelte-adapter-github`, then add the adapter to your `svelte.config.js`...
 
 ```js
 // svelte.config.js
-import adapter from '@sveltejs/adapter-static';
+import adapter from 'svelte-adapter-github';
 
 export default {
   kit: {
     adapter: adapter({
       // default options are shown. On some platforms
       // these options are set automatically — see below
-      pages: 'build',
-      assets: 'build',
+      pages: 'docs',
+      assets: 'docs',
       fallback: null,
-      precompress: false
+      precompress: false,
+      domain: '',
+      jekyll: false
     })
   }
 };
@@ -41,7 +43,7 @@ Some platforms have zero-config support (more to come in future):
 
 - [Vercel](https://vercel.com)
 
-On these platforms, you should omit the adapter options so that `adapter-static` can provide the optimal configuration:
+On these platforms, you should omit the adapter options so that `svelte-adapter-github` can provide the optimal configuration:
 
 ```diff
 export default {
@@ -57,7 +59,7 @@ export default {
 
 ### pages
 
-The directory to write prerendered pages to. It defaults to `build`.
+The directory to write prerendered pages to. It defaults to `docs`.
 
 ### assets
 
@@ -71,9 +73,17 @@ Specify a fallback page for SPA mode, e.g. `index.html` or `200.html` or `404.ht
 
 If `true`, precompresses files with brotli and gzip. This will generate `.br` and `.gz` files.
 
+### domain
+
+If you're using a custom domain with GitHub, add the value here.
+
+### jekyll
+
+If `true`, does not create a `.nojekyll` file. Default is false; which is probably what you want in most cases.
+
 ## SPA mode
 
-You can use `adapter-static` to create a single-page app or SPA by specifying a **fallback page**.
+You can use `svelte-adapter-github` to create a single-page app or SPA by specifying a **fallback page**.
 
 > In most situations this is not recommended: it harms SEO, tends to slow down perceived performance, and makes your app inaccessible to users if JavaScript fails or is disabled (which happens [more often than you probably think](https://kryogenix.org/code/browser/everyonehasjs.html)).
 
@@ -81,7 +91,7 @@ The fallback page is an HTML page created by SvelteKit that loads your app and n
 
 ```js
 // svelte.config.js
-import adapter from '@sveltejs/adapter-static';
+import adapter from 'svelte-adapter-github';
 
 export default {
   kit: {
@@ -104,7 +114,7 @@ If you want to create a simple SPA with no prerendered routes, the necessary con
 
 ```js
 // svelte.config.js
-import adapter from '@sveltejs/adapter-static';
+import adapter from 'svelte-adapter-github';
 
 export default {
   kit: {
@@ -125,7 +135,7 @@ export const ssr = false;
 
 When building for GitHub Pages, make sure to update [`paths.base`](https://kit.svelte.dev/docs/configuration#paths) to match your repo name, since the site will be served from <https://your-username.github.io/your-repo-name> rather than from the root.
 
-You will have to prevent GitHub's provided Jekyll from managing your site by putting an empty `.nojekyll` file in your static folder. If you do not want to disable Jekyll, change the kit's `appDir` configuration option to `'app_'` or anything not starting with an underscore. For more information, see GitHub's [Jekyll documentation](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll#configuring-jekyll-in-your-github-pages-site).
+`svelte-adapter-github` creates a `.nojekyll` file for you, to prevent GitHub's provided Jekyll from managing your site. If you do not want to disable Jekyll, use adapter option `jekyll: false` and change the kit's `appDir` configuration option to `'app_'` or anything not starting with an underscore. For more information, see GitHub's [Jekyll documentation](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll#configuring-jekyll-in-your-github-pages-site).
 
 A config for GitHub Pages might look like the following:
 
@@ -149,7 +159,7 @@ const config = {
 
 ## Changelog
 
-[The Changelog for this package is available on GitHub](https://github.com/sveltejs/kit/blob/master/packages/adapter-static/CHANGELOG.md).
+[The Changelog for this package is available on GitHub](https://github.com/malynium/svelte-adapter-github/CHANGELOG.md).
 
 ## License
 

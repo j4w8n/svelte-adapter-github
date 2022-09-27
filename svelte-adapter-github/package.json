@@ -1,13 +1,12 @@
 {
-	"name": "@sveltejs/adapter-static",
-	"version": "1.0.0-next.43",
+	"name": "svelte-adapter-github",
+	"version": "1.0.0-next.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/sveltejs/kit",
-		"directory": "packages/adapter-static"
+		"url": "https://github.com/malynium/svelte-adapter-github"
 	},
 	"license": "MIT",
-	"homepage": "https://kit.svelte.dev",
+	"homepage": "https://malynium.com",
 	"type": "module",
 	"main": "index.js",
 	"exports": {
@@ -25,7 +24,7 @@
 		"test": "uvu test test.js"
 	},
 	"devDependencies": {
-		"@sveltejs/kit": "workspace:*",
+		"@sveltejs/kit": "next",
 		"@types/node": "^16.11.36",
 		"sirv": "^2.0.2",
 		"svelte": "^3.48.0",
