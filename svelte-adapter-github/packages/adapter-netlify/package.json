@@ -1,0 +1,52 @@
+{
+	"name": "@sveltejs/adapter-netlify",
+	"version": "1.0.0-next.78",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sveltejs/kit",
+		"directory": "packages/adapter-netlify"
+	},
+	"license": "MIT",
+	"homepage": "https://kit.svelte.dev",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"import": "./index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "index.js",
+	"types": "index.d.ts",
+	"files": [
+		"files",
+		"index.d.ts"
+	],
+	"scripts": {
+		"dev": "rimraf files && rollup -cw",
+		"build": "rimraf files && rollup -c && cp src/edge.js files/edge.js",
+		"test": "uvu src \"(spec\\.js|test[\\\\/]index\\.js)\"",
+		"check": "tsc",
+		"lint": "prettier --check . --config ../../.prettierrc --ignore-path .gitignore",
+		"format": "npm run lint -- --write",
+		"prepublishOnly": "npm run build"
+	},
+	"dependencies": {
+		"@iarna/toml": "^2.2.5",
+		"esbuild": "^0.15.7",
+		"set-cookie-parser": "^2.4.8"
+	},
+	"devDependencies": {
+		"@netlify/functions": "^1.0.0",
+		"@rollup/plugin-commonjs": "^22.0.1",
+		"@rollup/plugin-json": "^4.1.0",
+		"@rollup/plugin-node-resolve": "^14.1.0",
+		"@sveltejs/kit": "workspace:*",
+		"@types/node": "^16.11.36",
+		"@types/set-cookie-parser": "^2.4.2",
+		"rimraf": "^3.0.2",
+		"rollup": "^2.78.1",
+		"typescript": "^4.8.2",
+		"uvu": "^0.5.3"
+	}
+}
