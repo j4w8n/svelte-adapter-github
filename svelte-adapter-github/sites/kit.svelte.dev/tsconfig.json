@@ -1,7 +1,0 @@
-{
-	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true
-	},
-	"extends": "./.svelte-kit/tsconfig.json"
-}
